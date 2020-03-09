@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  redis:
+    container_name: redis
+    image: redis:alpine 
+  django:
+    container_name: django
+    build: 
+      context: .
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+    command: sh -c "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:80"
+    ports:
+      - "80:80"
+    environment:
+      - "DEBUG=True"
+      - "EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend"
+  celery:
+    container_name: celery
+    build: 
+      context: .
+    command: sh -c "pip install -r requirements.txt && celery -A app worker -l info"
+    environment:
+      - SECRET_KEY=testing_secret_key
+      - "DEBUG=True"
+      - "EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend"
+    volumes:
+      - .:/code
+    depends_on:
+      - redis

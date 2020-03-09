@@ -1,0 +1,75 @@
+{
+	"name": "django-heroku",
+	"description": "Simple django+celery installation for docker & heroku",
+	"repository": "https://github.com/callmewind/django-heroku",
+	"image": "heroku/python",
+	"keywords": ["django", "docker", "heroku" ],
+	"website": "https://github.com/callmewind/django-heroku",
+	"addons" : [
+		{
+			"plan": "heroku-postgresql"
+		},
+		{
+			"plan": "heroku-redis"
+		}
+	],
+	"env": {
+		"SECRET_KEY": {
+			"description": "A secret key for verifying the integrity of signed cookies.",
+			"generator": "secret"
+		},
+		"ALLOWED_HOSTS": {
+			"description": "List of domains used in the app",
+			"value": ".herokuapp.com"
+		},
+		"DEFAULT_ADMIN_USERNAME": {
+			"description": "Choose an username for the first user generated automatically",
+			"value": "admin"
+		},
+		"DEFAULT_ADMIN_EMAIL": {
+			"description": "Email for the first user generated automatically",
+			"value": "admin@example.com"
+		},
+		"DEFAULT_ADMIN_PASSWORD": {
+			"description": "Password for the first user generated automatically. It is recommended to change it after first login",
+			"value": "admin"
+		},
+		"COMPANY_NAME": {
+			"description": "Name of your company",
+			"value": "django-heroku"
+		},
+		"EMAIL_HOST": {
+			"description": "SMTP Host"
+		},
+		"EMAIL_HOST_USER": {
+			"description": "SMTP username",
+			"required": false
+		},
+		"EMAIL_HOST_PASSWORD": {
+			"description": "SMTP password",
+			"required": false
+		},
+		"EMAIL_PORT": {
+			"description": "SMTP port",
+			"value": "587"
+		},
+		"EMAIL_USE_TLS": {
+			"description": "Enable SMTP TLS",
+			"value": "True",
+			"required": false
+		},
+		"DEFAULT_FROM_EMAIL": {
+			"description": "Default reply-to address",
+			"value": "",
+			"required": false
+		},
+		"APP_URL": {
+			"description": "Application hostname",
+			"value": "http://example.com"
+		},
+		"APP_NAME": {
+			"description": "Application name",
+			"value": "app"
+		}
+	}
+}
